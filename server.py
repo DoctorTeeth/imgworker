@@ -28,6 +28,7 @@ if __name__ == "__main__":
     server.start()
     print("Server started")
     while(True):
-        foo = 2
+        data, header = server.receive()
+        server.send(data)
 
 
