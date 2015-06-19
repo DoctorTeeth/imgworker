@@ -1,3 +1,5 @@
 # imgworker
 
-This is just a prototype
+    ./imgworker <filename>
+
+will initialize the client reading training input from <filename>.
