@@ -20,7 +20,7 @@
 class NeonTest
 {
 public:
-    NeonTest()
+    NeonTest() : _server(1,1)
     {
         // a char array
         _buf = new unsigned char[BUF_SIZE];
@@ -32,12 +32,22 @@ public:
         delete[] _buf;
     }
 
-    float predict()
+    void serve()
     {
+        std::cout << "waiting to serve" << std::endl; 
         char result[1];
-        _client.send(_buf);
-        _client.receive((unsigned char*) result);
-        return result[0];
+        _server.receive((unsigned char*) result);
+        std::cout << "recv has fired" << std::endl; 
+        _buf[0] = result[0];
+        _server.send(_buf);
+        std::cout << "send has fired" << std::endl; 
+    }
+
+    void start()
+    {
+        // i think that these things get started
+        // automatically
+        _server.start();
     }
 
     void read(char c)
@@ -51,33 +61,26 @@ private:
 private:
     // buff is just a char pointer
     unsigned char*      _buf;
-    Shmem::Client       _client;
+    Shmem::Server  _server;
 };
 
 int main(int argc, char** argv)
 {
-    if (argc < 2) {
+    if (argc < 1) {
         std::cout << "Usage: " 
                   << argv[0] 
-                  << " <char> " 
                   << std::endl;
         return 0;
     }
+    
+    std::cout << "Worker server started" << std::endl;
 
-    // filename is the name we pass in
-    char c = argv[1][0];
-
-    // now we declare a NeonTest
     NeonTest test;
+    //test.start();
 
-    //then we call read on that filename
-    // this puts the right stuff into buf
-    // presumably in the format that python needs
-    test.read(c);
+    while(true){
+        test.serve();
+    }
 
-    // then we get the prediction out
-    float result = test.predict();
-     
-    std::cout << "result " << result << std::endl;
     return 0;
 }

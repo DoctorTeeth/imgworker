@@ -25,15 +25,12 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
-    client = Client(req_size=1, res_size=1)
-    client.start()
-    logging.info("I called client start from the script")
-    for i in range(1,10):
-        client.send(str(i))
-        print "requested: ", i 
-        data, header = client.receive()
-        print "here is the data: ", data 
-        
+    server = Server(req_size=1, res_size=1)
+    server.start()
+    print("Server started")
+    while(True):
+        data, header = server.receive()
+        server.send(data)
         
 
 

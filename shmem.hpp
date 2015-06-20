@@ -40,6 +40,7 @@
 
 #include <string>
 
+#include <iostream>
 /*
   overall this is very similar to a C++ version of everything in shmem.py
   this makes sense, because it's just allowing us to use C++ to write to
@@ -71,6 +72,8 @@ public:
 
     void create(int data_size)
     {
+
+        std::cout << "CREATE HAS BEEN CALLED" << std::endl;
         // initializes the data
         _data_size = data_size;
 
@@ -126,6 +129,7 @@ public:
         }
 
         // close the fd - we already mapped it
+        // do we actually want to do this?
         ::close(shmfd);
     }
 
@@ -276,6 +280,7 @@ public:
 
     void start()
     {
+        std::cout << "start has been called" << std::endl;
         _request->create(_req_size);
         _response->create(_res_size);
     }
