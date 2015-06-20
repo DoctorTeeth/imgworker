@@ -16,8 +16,7 @@ from skimage import io
 from neon.datasets.dataset import Dataset
 from neon.util.compat import range, StringIO
 from neon.util.param import opt_param
-# change this back to the shmem version 
-from shmem import Client, Server
+from neon.ipc.shmem import Client, Server
 
 logging.basicConfig()
 
