@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class NeonTest
 {
@@ -72,6 +73,15 @@ int main(int argc, char** argv)
                   << std::endl;
         return 0;
     }
+
+    // testing c++11 features this way for now
+    std::vector<int> v = {1,2,3,4,5};
+    int x = 0;
+    for(auto elt : v){
+       x += elt; 
+    }
+    std::string testString = (x == 15) ? "PASS" : "FAIL"; 
+    std::cout << "c++11 test: " << testString << std::endl;
     
     std::cout << "Worker server started" << std::endl;
 
