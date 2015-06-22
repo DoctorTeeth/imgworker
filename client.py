@@ -27,11 +27,12 @@ if __name__ == "__main__":
     client = Client(req_size=1, res_size=1)
     client.start()
     logging.info("I called client start from the script")
-    for i in range(1,10):
-        client.send(str(i))
-        print "requested: ", i 
+    chars = ['a','b','c','d','e']
+    for i in range(0,5):
+        client.send(str(chars[i]))
+        print "requested: ", chars[i] 
         data, header = client.receive()
-        print "here is the data: ", data 
+        print "here is the data: ", chr(data[0])
         
         
 

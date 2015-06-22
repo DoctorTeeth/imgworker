@@ -17,11 +17,10 @@ from neon.datasets.dataset import Dataset
 from neon.util.compat import range, StringIO
 from neon.util.param import opt_param
 # change this back to the shmem version 
-from shmem import Client, Server
+from neon.ipc.shmem import Client, Server
 
 logging.basicConfig()
 
-# need to add a logger back at some point
 logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
