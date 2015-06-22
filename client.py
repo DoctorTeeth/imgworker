@@ -24,7 +24,7 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
-    client = Client(req_size=1, res_size=1)
+    client = Client()
     client.start()
     logging.info("I called client start from the script")
     chars = ['a','b','c','d','e']
@@ -34,6 +34,3 @@ if __name__ == "__main__":
         data, header = client.receive()
         print "here is the data: ", chr(data[0])
         
-        
-
-
