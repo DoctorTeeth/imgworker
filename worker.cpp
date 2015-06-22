@@ -21,7 +21,8 @@
 class NeonTest
 {
 public:
-    NeonTest() : _server(1,1)
+    // args go <req_size, res_size>
+    NeonTest() : _server(2,2)
     {
         // a char array
         _buf = new unsigned char[BUF_SIZE];
@@ -36,28 +37,18 @@ public:
     void serve()
     {
         std::cout << "waiting to serve" << std::endl; 
-        char result[1];
+        char result[2];
         _server.receive((unsigned char*) result);
         std::cout << "recv has fired" << std::endl; 
-        _buf[0] = result[0];
+        _buf[0] = result[1];
+        _buf[1] = result[0];
         _server.send(_buf);
         std::cout << "send has fired" << std::endl; 
     }
 
-    void start()
-    {
-        // i think that these things get started
-        // automatically
-        _server.start();
-    }
-
-    void read(char c)
-    {
-        _buf[0] = c;
-    }
 
 private:
-    static const int    BUF_SIZE = 1;
+    static const int    BUF_SIZE = 2;
 
 private:
     // buff is just a char pointer
@@ -86,7 +77,6 @@ int main(int argc, char** argv)
     std::cout << "Worker server started" << std::endl;
 
     NeonTest test;
-    //test.start();
 
     while(true){
         test.serve();

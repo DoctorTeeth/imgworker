@@ -102,7 +102,10 @@ public:
         // TODO: i think there might be a problem here
         // I want all of the old sems, locks, and shmems to be
         // killed when a new server starts
-        _empty_sem = sem_open(_empty_sem_name.c_str(), O_CREAT, 1);
+        _empty_sem = sem_open(_empty_sem_name.c_str(),
+                              O_CREAT, 
+                              0600,
+                              1);
         
         // exit if we couldn't allocate the sem
         if (_empty_sem == SEM_FAILED) {
@@ -112,12 +115,19 @@ public:
 
         // do the same stuff with the fill semaphore 
         // and with the mutex
-        _fill_sem = sem_open(_fill_sem_name.c_str(), O_CREAT, 0);
+        _fill_sem = sem_open(_fill_sem_name.c_str(),
+                              O_CREAT, 
+                              0600,
+                              0);
         if (_fill_sem == SEM_FAILED) {
             perror("sem_open");
             exit(1);
         }
-        _mutex = sem_open(_mutex_name.c_str(), O_CREAT, 1);
+
+        _mutex = sem_open(_mutex_name.c_str(),
+                              O_CREAT, 
+                              0600,
+                              1);
         if (_mutex == SEM_FAILED) {
             perror("sem_open");
             exit(1);
