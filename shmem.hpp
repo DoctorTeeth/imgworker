@@ -295,6 +295,8 @@ public:
     void start()
     {
         std::cout << "start has been called" << std::endl;
+        _request->destroy();
+        _response->destroy();
         _request->create(_req_size);
         _response->create(_res_size);
     }
