@@ -99,9 +99,6 @@ public:
         // declare empty sem with initial value 1 
         // (since the region starts empty)
 
-        // TODO: i think there might be a problem here
-        // I want all of the old sems, locks, and shmems to be
-        // killed when a new server starts
         _empty_sem = sem_open(_empty_sem_name.c_str(),
                               O_CREAT, 
                               0600,

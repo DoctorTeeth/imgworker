@@ -22,7 +22,7 @@ class NeonTest
 {
 public:
     // args go <req_size, res_size>
-    NeonTest() : _server(2,2)
+    NeonTest() : _server(1,2)
     {
         // a char array
         _buf = new unsigned char[BUF_SIZE];
@@ -37,11 +37,11 @@ public:
     void serve()
     {
         std::cout << "waiting to serve" << std::endl; 
-        char result[2];
+        char result[1];
         _server.receive((unsigned char*) result);
         std::cout << "recv has fired" << std::endl; 
-        _buf[0] = result[1];
-        _buf[1] = result[0];
+        _buf[0] = result[0];
+        _buf[1] = result[0] + 1;
         _server.send(_buf);
         std::cout << "send has fired" << std::endl; 
     }

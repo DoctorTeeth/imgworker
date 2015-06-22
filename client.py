@@ -27,7 +27,7 @@ if __name__ == "__main__":
     client = Client()
     client.start()
     logging.info("I called client start from the script")
-    chars = ["ab","bc","cd","de","ef"]
+    chars = ["a","b","c","d","e"]
     for i in range(0,5):
         client.send(chars[i])
         print "requested: ", chars[i] 
